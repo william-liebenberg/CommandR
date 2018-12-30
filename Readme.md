@@ -2,7 +2,22 @@
 
 I wrote this library from scratch in an attempt to really understand the basics of the CQRS (**C**ommand **Q**uery **R**esponsibility **S**egregation) Pattern.
 
+## Top 5 tips to be a good CommandR
+
+1. Do not reuse `Command` or `Query` objects inside each other
+2. Make your `Command` and `Query` objects immutable
+3. Use `Unit` as a response type when dealing with fire-and-forget (eventual consistency) Commands
+4. Use `Event`s and `IEventHandler`s to reduce dependencies and complexity of a `Command`
+5. Tests are easy to write! so write them for all your commands and queries!
+
 ## Implemeting a Command
+
+1. Create a new class that implements `Command<TResponse>`
+2. Give your command some arguments and persist them as immutable fields (get only)
+3. Implement a sealed and nested `ICommandHandler<TCommand, TResponse>`
+4. Implement the body of the `Handle` method
+5. Publish domain events
+6. Return a response (or `Unit`)
 
 ```csharp
 public class CreateMovieCommand : Command<int>
@@ -43,7 +58,7 @@ public class CreateMovieCommand : Command<int>
 
 ## Executing a Command
 
-You can `execute` your command via an instance of the `ICommander`. The `ICommander` will take care of resolving the correct Command Handler for you along with injecting all the required dependencies that the handler requires.
+You can `Execute` your command via an instance of the `ICommander`. The `ICommander` will take care of resolving the correct Command Handler for you along with injecting all the required dependencies that the handler requires.
 
 ```csharp
 
