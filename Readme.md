@@ -1,5 +1,7 @@
 # CommandR
 
+> NOTE: **Project is inactive**. Please use MediatR as per SSW Rule - [Do you keep business logic out of the presentation layer?](https://www.ssw.com.au/rules/keep-business-logic-out-of-the-presentation-layer)
+
 I wrote this library from scratch in an attempt to really understand the basics of the CQRS (**C**ommand **Q**uery **R**esponsibility **S**egregation) Pattern.
 
 ## Top 5 tips to be a good CommandR
